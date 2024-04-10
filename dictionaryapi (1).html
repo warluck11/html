@@ -1,0 +1,60 @@
+<html>
+
+	<head>
+		<title>Dictionary App</title>
+		
+		
+	</head>
+	
+	<body>
+	    
+		<h1>Welcome to the Dictonary App</h1>
+		
+		<form>
+			<label>Enter Word</label>
+			<input type="text" id="pword">
+			<button type="submit" value="submit" id="submit">Get meaning</button>
+			
+			<p>Defination:<span id="definition"></span></p>
+			<p>Word:<span id="word"></span></p>
+			<p>valid:<span id="valid"></span></p>
+			
+		</form>
+		
+		<script>
+			const options = {
+								method: 'GET',
+								headers: {
+											'X-RapidAPI-Key': '8585dd1bb0mshad29c98b073dfa6p1492e1jsn35fdc7b6d883',
+											'X-RapidAPI-Host': 'dictionary-by-api-ninjas.p.rapidapi.com'
+										}
+							};
+
+							
+			const dictionaryword = (pword) =>{
+			
+				fetch('https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word='+pword, options)
+				.then((response) =>{
+					return response.json()
+				})
+				.then((data) =>{
+					console.log(data)
+					
+					definition.innerHTML = data.definition
+					word.innerHTML = data.word
+					valid.innerHTML = data.valid
+				})
+			}
+			
+			submit.addEventListener("click",(e) => {
+				e.preventDefault()
+				dictionaryword(pword.value)
+			})
+			
+			//dictionaryword("bright")
+			
+		</script>
+	</body>
+	
+</html>
+
